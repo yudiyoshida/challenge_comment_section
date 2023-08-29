@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CommentComponent } from './comment.component';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./modules/comment/comment.module').then(m => m.CommentModule),
+    component: CommentComponent,
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class CommentRoutingModule { }
