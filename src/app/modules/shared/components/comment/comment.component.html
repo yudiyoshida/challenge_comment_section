@@ -1,0 +1,48 @@
+<section class="p-5 grid grid-cols-2 md:grid-cols-custom-md-3cols gap-5 bg-white rounded-md">
+
+  <div class="col-span-2 md:col-span-1 md:-order-2">
+    <div class="flex justify-start items-center gap-5">
+      <img [src]="comment.user.image.png" alt="profile-image" class="h-12">
+      <a class="font-bold cursor-pointer">{{ comment.user.username }}</a>
+      <p *ngIf="isMyComment" class="font-bold px-3 py-0.5 rounded-md text-white bg-custom-purple">you</p>
+      <p class="text-gray-600">{{ comment.createdAt }}</p>
+    </div>
+  </div>
+  
+  <div class="col-span-2">
+    <p class="text-gray-600">{{ comment.content }}</p>
+  </div>
+  
+  <div class="md:order-first row-span-2">
+    <div class="flex w-36 justify-between items-center p-2 rounded-md bg-gray-200 md:flex-col md:w-fit md:space-y-3 md:p-4">
+      <img src="assets/svg/icon-plus.svg" alt="plus-icon" class="cursor-pointer">
+      <p class="text-custom-purple font-bold">{{ comment.score }}</p>
+      <img src="assets/svg/icon-minus.svg" alt="minus-icon" class="cursor-pointer">
+    </div>
+  </div>
+  
+  <div class="md:-order-1">    
+    <div class="flex justify-end items-center gap-4 p-2 h-full">
+
+      <ng-container *ngIf="isMyComment">
+        <div class="flex justify-center items-center gap-2 cursor-pointer hover:opacity-50">
+          <img src="assets/svg/icon-delete.svg" alt="">
+          <p class="font-bold text-custom-soft-red">Delete</p>
+        </div>
+        <div class="flex justify-center items-center gap-2 cursor-pointer hover:opacity-50">
+          <img src="assets/svg/icon-edit.svg" alt="">
+          <p class="font-bold text-custom-purple">Edit</p>
+        </div>
+      </ng-container>
+      
+      <ng-container *ngIf="!isMyComment">
+        <div class="flex justify-center items-center gap-2 cursor-pointer hover:opacity-50">
+          <img src="assets/svg/icon-reply.svg" alt="">
+          <p class="font-bold text-custom-purple">Reply</p>
+        </div>
+      </ng-container>
+
+    </div>
+  </div>
+
+</section>
