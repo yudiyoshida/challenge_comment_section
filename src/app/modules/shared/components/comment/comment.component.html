@@ -1,3 +1,5 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 <section class="p-5 grid grid-cols-2 md:grid-cols-custom-md-3cols gap-5 bg-white rounded-md">
 
   <div class="col-span-2 md:col-span-1 md:-order-2">
@@ -10,7 +12,13 @@
   </div>
   
   <div class="col-span-2">
-    <p class="text-gray-600">{{ comment.content }}</p>
+    <p class="text-gray-600" *ngIf="!editMode">{{ comment.content }}</p>
+    <ng-container *ngIf="isMyComment && editMode">
+      <div class="text-right">
+        <textarea rows="3" class="w-full border border-gray-200 rounded-md p-3">{{ comment.content }}</textarea>
+        <button class="button" (click)="editMode = !editMode">Update</button>
+      </div>
+    </ng-container>
   </div>
   
   <div class="md:order-first row-span-2">
@@ -25,18 +33,18 @@
     <div class="flex justify-end items-center gap-4 p-2 h-full">
 
       <ng-container *ngIf="isMyComment">
-        <div class="flex justify-center items-center gap-2 cursor-pointer hover:opacity-50">
+        <div class="flex justify-center items-center gap-2 cursor-pointer hover:opacity-50" (click)="openDialog()">
           <img src="assets/svg/icon-delete.svg" alt="">
           <p class="font-bold text-custom-soft-red">Delete</p>
         </div>
-        <div class="flex justify-center items-center gap-2 cursor-pointer hover:opacity-50">
+        <div class="flex justify-center items-center gap-2 cursor-pointer hover:opacity-50" (click)="editMode = !editMode">
           <img src="assets/svg/icon-edit.svg" alt="">
           <p class="font-bold text-custom-purple">Edit</p>
         </div>
       </ng-container>
       
       <ng-container *ngIf="!isMyComment">
-        <div class="flex justify-center items-center gap-2 cursor-pointer hover:opacity-50">
+        <div class="flex justify-center items-center gap-2 cursor-pointer hover:opacity-50" (click)="replyMode = !replyMode">
           <img src="assets/svg/icon-reply.svg" alt="">
           <p class="font-bold text-custom-purple">Reply</p>
         </div>
@@ -46,3 +54,6 @@
   </div>
 
 </section>
+<ng-container *ngIf="!isMyComment && replyMode">
+  <app-reply [myProfile]="myProfile"></app-reply>
+</ng-container>

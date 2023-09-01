@@ -3,6 +3,20 @@
     <app-comment
       [comment]="item"
       [isMyComment]="item.user.username === myProfile.username"
+      [myProfile]="myProfile"
     ></app-comment>
+    
+    <ng-container *ngIf="item.replies.length > 0">
+      <ul class="ml-5 space-y-5 my-5 pl-5 border border-l-gray-300">
+        <li *ngFor="let reply of item.replies">
+          <app-comment
+            [comment]="reply"
+            [isMyComment]="reply.user.username === myProfile.username"
+            [myProfile]="myProfile"
+          ></app-comment>
+        </li>
+      </ul>
+    </ng-container>
+
   </li>
 </ul>

@@ -6,3 +6,9 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@layer components {
+  .button {
+    @apply uppercase bg-custom-purple px-4 py-2 rounded-md text-white font-bold
+  }
+}
